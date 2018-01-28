@@ -65,6 +65,7 @@ func (srv *Server) newConn(nc net.Conn) *conn {
 		bufw:     bufio.NewWriterSize(nc, 1024*64),
 		readbuf:  make([]byte, 4096),
 		writebuf: make([]byte, 4096),
+		state:    StateUninitialized,
 	}
 }
 
