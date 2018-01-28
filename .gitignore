@@ -1,5 +1,6 @@
 ### Go template
 # Binaries for programs and plugins
+bin/
 *.exe
 *.dll
 *.so
@@ -14,3 +15,6 @@ pkg/
 
 # vendor
 vendor/
+
+# log
+*.log
