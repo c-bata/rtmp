@@ -25,6 +25,25 @@ func main() {
 }
 ```
 
+## Run
+
+Build [example server script](./_example/server/main.go) via Make and Run it.
+
+```
+$ make build
+$ ./bin/server
+2018/01/28 17:09:53 Serving RTMP on :1935 (rev-a669378)
+```
+
+After that, you can send a RTMP stream using RTMP client like ffmpeg or Wirecast.
+In the case of using ffmpeg, please execute a following command.
+
+```console
+$ ffmpeg -re -i /path/to/your_video.mp4 -map 0 -c:v libx264 -c:a aac -f flv rtmp://127.0.0.1:1935/appName/appInstance
+```
+
+![GIF Animation - Receiving RTMP Stream.](https://github.com/c-bata/assets/raw/master/rtmp/rtmp-receiving-data.gif)
+
 ## Bibliography
 
 * [RTMP 1.0 Specification - Adobe Systems Inc](http://www.adobe.com/devnet/rtmp.html)

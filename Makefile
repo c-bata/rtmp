@@ -13,6 +13,10 @@ setup:  ## Setup for required tools.
 fmt: ## Formatting source codes.
 	@goimports -w .
 
+.PHONY: test
+test: ## Run tests.
+	go test .
+
 .PHONY: lint
 lint: ## Run go vet.
 	@go vet ./...
