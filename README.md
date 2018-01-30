@@ -2,12 +2,17 @@
 
 Server implementation of RTMP 1.0 protocol in Go.
 
-## Usage
+And I wrote and published a japanese blog post about how to develop a RTMP server. Please see https://developers.cyberagent.co.jp/blog/archives/13739/
+
+## Getting Started
+
+Usage is like this:
 
 ```go
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 
@@ -15,23 +20,24 @@ import (
 )
 
 func main() {
-	log.Print("Serving RTMP on :1935")
+	var addr string
+	flag.StringVar(&addr, "addr", ":1935", `proxy local address`)
+	flag.Parse()
 
-	err := rtmp.ListenAndServe(":1935")
+	log.Printf("Serving RTMP on %s", addr)
+	err := rtmp.ListenAndServe(addr)
 	if err != nil {
-		log.Printf("Got Error: %s", err)
+		log.Printf("Catch Error: %s", err)
 		os.Exit(1)
 	}
 }
 ```
 
-## Run
-
-Build [example server script](./_example/server/main.go) via Make and Run it.
+Build [an example server script](./_example/server/main.go) via Make and Run it.
 
 ```
 $ make build
-$ ./bin/server
+$ ./bin/server -addr :1935
 2018/01/28 17:09:53 Serving RTMP on :1935 (rev-a669378)
 ```
 
@@ -50,3 +56,4 @@ $ ffmpeg -re -i /path/to/your_video.mp4 -map 0 -c:v libx264 -c:a aac -f flv rtmp
 * [Action Message Format 0 (AMF 0) specification - Adobe Systems Inc](http://wwwimages.adobe.com/content/dam/acom/en/devnet/pdf/amf0-file-format-specification.pdf)
 * [Action Message Format 3 (AMF 3) specification - Adobe Systems Inc](http://wwwimages.adobe.com/content/dam/acom/en/devnet/pdf/amf-file-format-spec.pdf)
 * [RTMP: A Quick Deep-Dive, Nick Chadwick - Youtube](https://www.youtube.com/watch?v=AoRepm5ks80)
+
