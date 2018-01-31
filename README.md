@@ -2,8 +2,6 @@
 
 Server implementation of RTMP 1.0 protocol in Go.
 
-And I wrote and published a japanese blog post about how to develop a RTMP server. Please see https://developers.cyberagent.co.jp/blog/archives/13739/
-
 ## Getting Started
 
 Usage is like this:
@@ -14,7 +12,6 @@ package main
 import (
 	"flag"
 	"log"
-	"os"
 
 	"github.com/c-bata/rtmp"
 )
@@ -27,8 +24,7 @@ func main() {
 	log.Printf("Serving RTMP on %s", addr)
 	err := rtmp.ListenAndServe(addr)
 	if err != nil {
-		log.Printf("Catch Error: %s", err)
-		os.Exit(1)
+		log.Fatalf("Catch Error: %s", err)
 	}
 }
 ```
@@ -48,7 +44,7 @@ In the case of using ffmpeg, please execute a following command.
 $ ffmpeg -re -i /path/to/your_video.mp4 -map 0 -c:v libx264 -c:a aac -f flv rtmp://127.0.0.1:1935/appName/appInstance
 ```
 
-![GIF Animation - Receiving RTMP Stream.](https://github.com/c-bata/assets/raw/master/rtmp/rtmp-receiving-data.gif)
+![GIF Animation - Receiving RTMP Stream.](https://github.com/c-bata/assets/raw/master/rtmp/rtmp-receiving-data-original.gif)
 
 ## Bibliography
 
