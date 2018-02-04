@@ -37,24 +37,24 @@ const (
 	StatePublishingContent
 )
 
-type Message uint8
+type MessageType uint8
 
 const (
-	MessageSetChunkSize              uint8 = 1
-	MessageAbort                           = 2
-	MessageAcknowledgement                 = 3
-	MessageUserControl                     = 4
-	MessageAcknowledgementWindowSize       = 5
-	MessageSetPeerBandwidth                = 6
-	MessageAudio                           = 8
-	MessageVideo                           = 9
-	MessageDataAMF3                        = 15
-	MessageSharedObjectAMF3                = 16
-	MessageCommandAMF3                     = 17
-	MessageDataAMF0                        = 18
-	MessageSharedObjectAMF0                = 19
-	MessageCommandAMF0                     = 20
-	MessageAggregate                       = 22
+	MessageSetChunkSize              MessageType = 1
+	MessageAbort                                 = 2
+	MessageAcknowledgement                       = 3
+	MessageUserControl                           = 4
+	MessageAcknowledgementWindowSize             = 5
+	MessageSetPeerBandwidth                      = 6
+	MessageAudio                                 = 8
+	MessageVideo                                 = 9
+	MessageDataAMF3                              = 15
+	MessageSharedObjectAMF3                      = 16
+	MessageCommandAMF3                           = 17
+	MessageDataAMF0                              = 18
+	MessageSharedObjectAMF0                      = 19
+	MessageCommandAMF0                           = 20
+	MessageAggregate                             = 22
 )
 
 // A Conn represents the RTMP connection and implements the RTMP protocol over net.Conn interface.
@@ -202,7 +202,7 @@ func (c *conn) readChunk() error {
 		return err
 	}
 
-	switch header.MessageHeader.MessageTypeID {
+	switch MessageType(header.MessageHeader.MessageTypeID) {
 	case MessageSetChunkSize:
 		//  0                   1                   2                   3
 		//  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
