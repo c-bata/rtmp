@@ -18,7 +18,7 @@ import (
 
 func main() {
 	var addr string
-	flag.StringVar(&addr, "addr", ":1935", `proxy local address`)
+	flag.StringVar(&addr, "addr", ":1935", `TCP address to listen on, ":1935" if empty`)
 	flag.Parse()
 
 	log.Printf("Serving RTMP on %s", addr)
