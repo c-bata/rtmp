@@ -331,7 +331,7 @@ func (c *conn) readChunk() error {
 		c.server.logf("Catch DataMessage(AMF0)")
 	case MessageCommandAMF0:
 		c.server.logf("Catch AMF0 Command Message")
-		err = c.handleCommandMessageAFM0(header)
+		err = c.handleCommandMessageAMF0(header)
 		if err != nil {
 			return err
 		}
@@ -363,7 +363,7 @@ func (c *conn) readChunk() error {
 	return nil
 }
 
-func (c *conn) handleCommandMessageAFM0(header *ChunkHeader) error {
+func (c *conn) handleCommandMessageAMF0(header *ChunkHeader) error {
 	ml := header.MessageHeader.MessageLength
 	payload := make([]byte, ml)
 	_, err := io.ReadAtLeast(c.bufr, payload, int(ml))
