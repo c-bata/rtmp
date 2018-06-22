@@ -225,7 +225,7 @@ func readMessageHeader(br *bufio.Reader, fmt uint8) (*MessageHeader, error) {
 		mh.Timestamp = binary.BigEndian.Uint32(append([]byte{0x0}, x[:3]...))
 		mh.MessageLength = binary.BigEndian.Uint32(append([]byte{0x0}, x[3:6]...))
 		mh.MessageTypeID = x[6]
-		mh.MessageStreamID = binary.BigEndian.Uint32(x[7:11])
+		mh.MessageStreamID = binary.LittleEndian.Uint32(x[7:11])
 		return mh, nil
 	case 1:
 		x := make([]byte, 7)
