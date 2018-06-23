@@ -41,7 +41,7 @@ func TestGenerateBasicHeader(t *testing.T) {
 }
 
 func TestReadMessageHeader(t *testing.T) {
-	header := []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0xb8, 0x14, 0x00, 0x00, 0x00, 0x00}
+	header := []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0xb8, 0x14, 0x01, 0x00, 0x00, 0x00}
 	in := bufio.NewReader(bytes.NewBuffer(header))
 	actual, err := readMessageHeader(in, 0)
 	if err != nil {
@@ -51,7 +51,7 @@ func TestReadMessageHeader(t *testing.T) {
 		Timestamp:       0,
 		MessageLength:   184,
 		MessageTypeID:   20,
-		MessageStreamID: 0,
+		MessageStreamID: 1,
 	}
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Should be %#v, but got %#v", actual, expected)
@@ -59,12 +59,12 @@ func TestReadMessageHeader(t *testing.T) {
 }
 
 func TestGenerateMessageHeader(t *testing.T) {
-	expected := []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0xb8, 0x14, 0x00, 0x00, 0x00, 0x00}
+	expected := []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0xb8, 0x14, 0x01, 0x00, 0x00, 0x00}
 	mh := &MessageHeader{
 		Timestamp:       0,
 		MessageLength:   184,
 		MessageTypeID:   20,
-		MessageStreamID: 0,
+		MessageStreamID: 1,
 	}
 	actual, err := genMessageHeader(mh, 0)
 	if err != nil {
